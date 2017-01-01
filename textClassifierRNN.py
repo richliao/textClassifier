@@ -1,3 +1,5 @@
+# author - Richard Liao
+# Dec 26 2016
 import numpy as np
 import pandas as pd
 import cPickle
@@ -79,7 +81,7 @@ print('Traing and validation set number of positive and negative reviews')
 print y_train.sum(axis=0)
 print y_val.sum(axis=0)
 
-GLOVE_DIR = "/ext/home/analyst/Testground/data/glove"
+GLOVE_DIR = "~/Testground/data/glove"
 embeddings_index = {}
 f = open(os.path.join(GLOVE_DIR, 'glove.6B.100d.txt'))
 for line in f:
