@@ -69,9 +69,11 @@ for i, sentences in enumerate(reviews):
     for j, sent in enumerate(sentences):
         if j< MAX_SENTS:
             wordTokens = text_to_word_sequence(sent)
-            for k, word in enumerate(wordTokens):
-                if k<MAX_SENT_LENGTH:
+            k=0
+            for _, word in enumerate(wordTokens):
+                if k<MAX_SENT_LENGTH and tokenizer.word_index[word]<MAX_NB_WORDS:
                     data[i,j,k] = tokenizer.word_index[word]
+                    k=k+1                    
                     
 word_index = tokenizer.word_index
 print('Total %s unique tokens.' % len(word_index))
