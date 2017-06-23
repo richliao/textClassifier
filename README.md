@@ -5,3 +5,6 @@ textClassifierHATT.py has the implementation of [Hierarchical Attention Networks
 textClassifierConv has implemented [Convolutional Neural Networks for Sentence Classification - Yoo Kim](https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf). Please see the [my blog](https://richliao.github.io/supervised/classification/2016/11/26/textclassifier-convolutional/) for full detail.
 
 textClassifierRNN has implemented bidirectional LSTM and one level attentional RNN. Please see the [my blog](https://richliao.github.io/supervised/classification/2016/12/26/textclassifier-RNN/) for full detail.
+
+## update on 6/22/2017 ##
+Please see my latest update on the post regarding attention weight retrieval. The result is not very promising. I will update the post once I have further result. 
