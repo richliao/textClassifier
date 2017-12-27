@@ -1,8 +1,6 @@
-# author - Richard Liao
-# Dec 26 2016
 import numpy as np
 import pandas as pd
-import cPickle
+import pickle
 from collections import defaultdict
 import re
 
@@ -10,8 +8,6 @@ from bs4 import BeautifulSoup
 
 import sys
 import os
-
-os.environ['KERAS_BACKEND']='theano'
 
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -37,19 +33,19 @@ def clean_str(string):
     string = re.sub(r"\"", "", string)    
     return string.strip().lower()
 
-data_train = pd.read_csv('~/Testground/data/imdb/labeledTrainData.tsv', sep='\t')
-print data_train.shape
+data_train = pd.read_csv('labeledTrainData.tsv', sep='\t')
+print(data_train.shape)
 
 texts = []
 labels = []
 
 for idx in range(data_train.review.shape[0]):
-    text = BeautifulSoup(data_train.review[idx])
-    texts.append(clean_str(text.get_text().encode('ascii','ignore')))
+    text = BeautifulSoup(data_train.review[idx], "lxml")
+    texts.append(clean_str(text.get_text()))
     labels.append(data_train.sentiment[idx])
     
 
-tokenizer = Tokenizer(nb_words=MAX_NB_WORDS)
+tokenizer = Tokenizer(num_words=MAX_NB_WORDS)
 tokenizer.fit_on_texts(texts)
 sequences = tokenizer.texts_to_sequences(texts)
 
@@ -74,10 +70,10 @@ x_val = data[-nb_validation_samples:]
 y_val = labels[-nb_validation_samples:]
 
 print('Number of positive and negative reviews in traing and validation set ')
-print y_train.sum(axis=0)
-print y_val.sum(axis=0)
+print(y_train.sum(axis=0))
+print(y_val.sum(axis=0))
 
-GLOVE_DIR = "/ext/home/analyst/Testground/data/glove"
+GLOVE_DIR = "glove/glove.6B/"
 embeddings_index = {}
 f = open(os.path.join(GLOVE_DIR, 'glove.6B.100d.txt'))
 for line in f:
@@ -122,7 +118,7 @@ model.compile(loss='categorical_crossentropy',
 print("model fitting - simplified convolutional neural network")
 model.summary()
 model.fit(x_train, y_train, validation_data=(x_val, y_val),
-          nb_epoch=10, batch_size=128)
+          epochs=10, batch_size=128)
 
 embedding_matrix = np.random.random((len(word_index) + 1, EMBEDDING_DIM))
 for word, i in word_index.items():
