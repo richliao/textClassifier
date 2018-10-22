@@ -20,14 +20,21 @@ git clone {repo address}
 cd textClassifier
 pip install -r req.xt
 
-# download imdb train from Kaggle
-wget https://www.kaggle.com/c/word2vec-nlp-tutorial/download/labeledTrainData.tsv
+# download imdb train from Kaggle in the below link and keep the files in the working directory
+https://www.kaggle.com/c/word2vec-nlp-tutorial/download/labeledTrainData.tsv
 # download glove word vector
 wget http://nlp.stanford.edu/data/glove.6B.zip
 unzip glove.6B.zip
 
+# install nltk 'punkt' using the following code in python interpretor
+>>>import nltk
+>>>nltk.download('punkt')
+
 # train the model
-python textClassifierHATT.py 
+python textClassifierHATT.py
+
+# note if in case while installing word2vec, cython error occurs then 
+pip install --upgrade cython
 ```
 
 
