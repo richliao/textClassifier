@@ -143,9 +143,9 @@ class AttLayer(Layer):
 
     def build(self, input_shape):
         assert len(input_shape) == 3
-        self.W = K.variable(self.init((input_shape[-1], self.attention_dim)))
-        self.b = K.variable(self.init((self.attention_dim, )))
-        self.u = K.variable(self.init((self.attention_dim, 1)))
+        self.W = K.variable(self.init((input_shape[-1], self.attention_dim)), name='W')
+        self.b = K.variable(self.init((self.attention_dim, )), name='b')
+        self.u = K.variable(self.init((self.attention_dim, 1)), name='u')
         self.trainable_weights = [self.W, self.b, self.u]
         super(AttLayer, self).build(input_shape)
 
